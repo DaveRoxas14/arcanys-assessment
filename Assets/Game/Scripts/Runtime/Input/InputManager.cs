@@ -48,7 +48,9 @@ public class InputManager : MonoBehaviour
         }
         
     }
-    
+
+    #region Pause Events
+
     private void OnPauseEvent(bool isPaused)
     {
         if (isPaused)
@@ -60,6 +62,8 @@ public class InputManager : MonoBehaviour
             _inputReader.SwitchToPlayer();
         }
     }
+
+    #endregion
 
     #region Input Reader
 

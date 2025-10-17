@@ -14,6 +14,8 @@ namespace Arcanys.Collectibles
         
         private ICollectible _effect;
 
+        #region Unity Functions
+
         private void Awake()
         {
             _effect = _effectBehavior as ICollectible;
@@ -33,6 +35,8 @@ namespace Arcanys.Collectibles
             // todo - add sfx/vfx and delay the game object destroy...
             Destroy(gameObject);
         }
+
+        #endregion
 
         private void PlayVfx()
         {

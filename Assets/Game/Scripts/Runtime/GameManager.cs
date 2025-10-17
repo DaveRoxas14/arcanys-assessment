@@ -7,7 +7,9 @@ namespace Game.Scripts.Runtime
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
-        
+
+        #region Members
+
         [Header("References")] 
         [SerializeField]
         private GameOverUI _gameOverUI;
@@ -19,6 +21,10 @@ namespace Game.Scripts.Runtime
         private bool _isGameOver;
 
         public bool IsGameOver => _isGameOver;
+
+        #endregion
+
+        #region Unity Functions
 
         private void Awake()
         {
@@ -32,6 +38,8 @@ namespace Game.Scripts.Runtime
         {
             ScoringManager.Instance.OnScoreChanged += OnScoreChanged;
         }
+
+        #endregion
 
         private void OnScoreChanged(int score)
         {

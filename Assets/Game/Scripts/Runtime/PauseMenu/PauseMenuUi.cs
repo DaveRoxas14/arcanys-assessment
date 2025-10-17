@@ -10,6 +10,8 @@ namespace Game.Scripts.Runtime.PauseMenu
 {
     public class PauseMenuUi : MonoBehaviour
     {
+        #region Members
+
         [Header("References")] 
         [SerializeField] private GameObject _pauseMenuObject;
         [SerializeField] private Button _resumeBtn;
@@ -17,11 +19,11 @@ namespace Game.Scripts.Runtime.PauseMenu
         [SerializeField] private Button _quitBtn;
         
         private bool _isPaused;
-        private bool isGameOver;
-
         public event Action<bool> OnGamePaused; 
 
         public bool IsPaused => _isPaused;
+
+        #endregion
 
         #region Unity Functions
 

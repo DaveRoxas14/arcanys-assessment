@@ -13,6 +13,8 @@ namespace Game.Scripts.Runtime.GameOver
 {
     public class GameOverUI : MonoBehaviour
     {
+        #region Members
+
         [Header("References")] 
         [SerializeField]
         private GameObject _gameOverScreenObject;
@@ -25,6 +27,8 @@ namespace Game.Scripts.Runtime.GameOver
         [SerializeField] private string _winString;
 
         [SerializeField] private string _loseString;
+
+        #endregion
 
         private bool _gameOver;
 

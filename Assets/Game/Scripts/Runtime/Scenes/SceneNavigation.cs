@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class SceneNavigation : MonoBehaviour
 {
+    #region Members
+
     [Header("References")]
     [SerializeField] private Button _playGameBtn;
     [SerializeField] private Button _settingsBtn;
@@ -19,6 +21,8 @@ public class SceneNavigation : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private int _sceneIndex;
+
+    #endregion
 
     #region Unity Functions
 
@@ -41,7 +45,9 @@ public class SceneNavigation : MonoBehaviour
     }
 
     #endregion
-    
+
+    #region Button Events
+
     private IEnumerator SelectDefaultButton()
     {
         yield return null;
@@ -61,5 +67,7 @@ public class SceneNavigation : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    #endregion
     
 }

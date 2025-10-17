@@ -16,6 +16,8 @@ public class ScoringManager : MonoBehaviour
             Instance = this;
     }
 
+    #region Scoring Helpers
+
     public void AddScore(int amount)
     {
         _score += amount;
@@ -27,4 +29,6 @@ public class ScoringManager : MonoBehaviour
         _score -= amount;
         OnScoreChanged?.Invoke(_score);
     }
+
+    #endregion
 }

@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     
     private void ApplyMovement()
     {
+        // Apply movement relative to camera...
         Vector3 direction;
         if (CameraTransform)
         {
@@ -136,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
             direction = forward * _moveInput.y + right * _moveInput.x;
         }
-        else
+        else // if there's no camera references for some reason... why?...
         {
             direction = new Vector3(_moveInput.x, 0, _moveInput.y);
         }
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
         var horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
         horizontalVelocity = Vector3.Lerp(horizontalVelocity, targetVelocity, _acceleration * Time.deltaTime);
 
-        // Apply gravity
+        // Apply gravity...
         if (!_isGrounded)
         {
             var gravityMultiplier = 1f;
@@ -155,7 +156,7 @@ public class PlayerController : MonoBehaviour
             if (_velocity.y < 0)
                 gravityMultiplier = _fallMultiplier;
             else if (_velocity.y > 0 && !_isJumping)
-                // if jump button is releasd early
+                // if jump button is releasd early...
                 gravityMultiplier = _variableJumpMultiplier;
 
             _velocity.y += _gravity * gravityMultiplier * Time.deltaTime;
@@ -164,10 +165,10 @@ public class PlayerController : MonoBehaviour
         _velocity.x = horizontalVelocity.x;
         _velocity.z = horizontalVelocity.z;
 
-        // Apply character movement
+        // Apply character movement...
         _movementController.Move(_velocity * Time.deltaTime);
 
-        // Add rotation to character movement
+        // Add rotation to character movement...
         if (direction.sqrMagnitude > 0.001f)
         {
             var targetRotation = Quaternion.LookRotation(direction);
