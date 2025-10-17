@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
     private void OnJump()
     {
         _lastJumpPressedTime = _jumpBufferTime;
+        _isJumping = true;
     }
 
     private void OnJumpReleased()
@@ -106,28 +107,6 @@ public class PlayerController : MonoBehaviour
     
     private void ApplyMovement()
     {
-        /*if (!_enableMove) return;
-        
-        var direction = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized;
-
-        if (direction.magnitude >= 0.1)
-        {
-            var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg 
-                              + _cameraTransform.eulerAngles.y;
-            
-            var angle = Mathf.SmoothDampAngle(
-                transform.eulerAngles.y, 
-                targetAngle, 
-                ref _turnSmoothVelocity, 
-                _rotationSpeed);
-            
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            var moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            
-            _movementController.Move(moveDirection.normalized * _moveSpeed * Time.deltaTime);
-        }*/
-        
         var direction = Vector3.zero;
         if (_cameraTransform)
         {
@@ -156,9 +135,17 @@ public class PlayerController : MonoBehaviour
         // Apply gravity
         if (!_isGrounded)
         {
-            float gravityMultiplier = (_velocity.y < 0) ? _fallMultiplier : 1f;
-            if (!_isJumping && _velocity.y > 0)
+            var gravityMultiplier = 1f;
+
+            if (_velocity.y < 0)
+            {
+                gravityMultiplier = _fallMultiplier;
+            }
+            else if (_velocity.y > 0 && !_isJumping)
+            {
+                // if jump button is releasd early
                 gravityMultiplier = _variableJumpMultiplier;
+            }
 
             _velocity.y += _gravity * gravityMultiplier * Time.deltaTime;
         }
