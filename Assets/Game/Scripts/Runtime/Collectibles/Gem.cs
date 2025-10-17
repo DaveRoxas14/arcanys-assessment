@@ -1,0 +1,47 @@
+﻿using System;
+using UnityEngine;
+
+namespace Arcanys.Collectibles
+{
+    /// <summary>
+    /// Handles the pickup logic of gems
+    /// </summary>
+    [RequireComponent(typeof(SphereCollider))]
+    public class Gem : MonoBehaviour
+    {
+        [Header("Effect")]
+        [SerializeField] private CollectibleEffectSo _effectBehavior;
+        
+        private ICollectible _effect;
+
+        private void Awake()
+        {
+            _effect = _effectBehavior as ICollectible;
+            
+            if(_effect == null)
+                Debug.LogError($"{name} has invalid effect!!");
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player")) return;
+            
+            _effect.UseCollectible(other.gameObject);
+            PlaySfx();
+            PlayVfx();
+            
+            // todo - add sfx/vfx and delay the game object destroy...
+            Destroy(gameObject);
+        }
+
+        private void PlayVfx()
+        {
+            
+        }
+
+        private void PlaySfx()
+        {
+           
+        }
+    }
+}

@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50fc58616b15836489dd1000f96ff735, type: 3}
-  m_Name: PlayerInputReader
-  m_EditorClassIdentifier: Arcanys.Runtime::InputReader
+  m_Script: {fileID: 11500000, guid: a4644108cf4e458091921eb92efab85a, type: 3}
+  m_Name: Score Gem Effect
+  m_EditorClassIdentifier: Arcanys.Runtime::Arcanys.Collectibles.ScoreGemEffectSo
+  _description: This will give points to player

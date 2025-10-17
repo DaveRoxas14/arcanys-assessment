@@ -42,6 +42,11 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
          PauseEvent?.Invoke();
    }
 
+   public void OnQuit(InputAction.CallbackContext context)
+   {
+      
+   }
+
    public void OnLook(InputAction.CallbackContext context)
    {
    }

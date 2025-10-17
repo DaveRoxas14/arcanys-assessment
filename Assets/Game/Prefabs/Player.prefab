@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Arcanys.Runtime::PlayerController
   _playerObject: {fileID: 4902856235144902121}
   _cameraTransform: {fileID: 0}
-  _inputReader: {fileID: 11400000, guid: 18b00ed3c5c680248a26030dcda2ebb8, type: 2}
+  _inputReader: {fileID: 11400000, guid: 2192414f9e0a091429c3ddd38d1bff06, type: 2}
   _movementController: {fileID: 357630153679929120}
   _enableMove: 1
   _enableJump: 1
