@@ -8,13 +8,18 @@ namespace Game.Scripts.Runtime.Scoring
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
 
+        private int _gameToWin;
+        
         private void Start()
         {
             ScoringManager.Instance.OnScoreChanged += OnScoreChanged;
+            _gameToWin = GameManager.Instance.ScoreToWin;
+            
+            _scoreText.text = $"0/{_gameToWin}";
         }
         private void OnScoreChanged(int score)
         {
-            _scoreText.text = $"{score}";
+            _scoreText.text = $"{score}/{_gameToWin}";
         }
 
         public void Dispose()
