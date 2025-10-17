@@ -138,9 +138,9 @@ MonoBehaviour:
   _acceleration: 12
   _airControlMultiplier: 0.5
   _rotationSpeed: 12
-  _jumpHeight: 2
+  _jumpHeight: 2.5
   _gravity: -12
-  _fallMultiplier: 3
+  _fallMultiplier: 2.5
   _coyoteTime: 0.15
   _jumpBufferTime: 0.1
   _variableJumpMultiplier: 3

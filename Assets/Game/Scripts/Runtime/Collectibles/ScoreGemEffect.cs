@@ -8,8 +8,7 @@ namespace Arcanys.Collectibles
         [SerializeField] private int scoreValue = 10;
         public override void UseCollectible(GameObject collector)
         {
-            // apply score here
-            Debug.Log("");
+            ScoringManager.Instance.AddScore(scoreValue);
         }
     }
 }
