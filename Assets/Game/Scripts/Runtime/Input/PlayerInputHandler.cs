@@ -688,6 +688,24 @@ namespace Arcanys.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ac9a67e-c325-403f-8251-01453319d060"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResumeGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""3eea7d55-27e1-4df6-8f27-c639b1ddf5d8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1108,6 +1126,50 @@ namespace Arcanys.Input
                     ""action"": ""TrackedDeviceOrientation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdd439f7-cfc5-4710-b61e-be7e9e5ab42c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f79a5f5-78a0-4721-a568-47d8847644e9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4600968-89c0-420d-920e-c8a60afe3234"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ResumeGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9884a3a-95c0-4182-9502-17b293f8644b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""ResumeGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1199,6 +1261,8 @@ namespace Arcanys.Input
             m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
             m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            m_UI_Unpause = m_UI.FindAction("Unpause", throwIfNotFound: true);
+            m_UI_ResumeGame = m_UI.FindAction("ResumeGame", throwIfNotFound: true);
         }
 
         ~@PlayerInputHandler()
@@ -1485,6 +1549,8 @@ namespace Arcanys.Input
         private readonly InputAction m_UI_ScrollWheel;
         private readonly InputAction m_UI_TrackedDevicePosition;
         private readonly InputAction m_UI_TrackedDeviceOrientation;
+        private readonly InputAction m_UI_Unpause;
+        private readonly InputAction m_UI_ResumeGame;
         /// <summary>
         /// Provides access to input actions defined in input action map "UI".
         /// </summary>
@@ -1536,6 +1602,14 @@ namespace Arcanys.Input
             /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
             /// </summary>
             public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/Unpause".
+            /// </summary>
+            public InputAction @Unpause => m_Wrapper.m_UI_Unpause;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/ResumeGame".
+            /// </summary>
+            public InputAction @ResumeGame => m_Wrapper.m_UI_ResumeGame;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1592,6 +1666,12 @@ namespace Arcanys.Input
                 @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                @Unpause.started += instance.OnUnpause;
+                @Unpause.performed += instance.OnUnpause;
+                @Unpause.canceled += instance.OnUnpause;
+                @ResumeGame.started += instance.OnResumeGame;
+                @ResumeGame.performed += instance.OnResumeGame;
+                @ResumeGame.canceled += instance.OnResumeGame;
             }
 
             /// <summary>
@@ -1633,6 +1713,12 @@ namespace Arcanys.Input
                 @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+                @Unpause.started -= instance.OnUnpause;
+                @Unpause.performed -= instance.OnUnpause;
+                @Unpause.canceled -= instance.OnUnpause;
+                @ResumeGame.started -= instance.OnResumeGame;
+                @ResumeGame.performed -= instance.OnResumeGame;
+                @ResumeGame.canceled -= instance.OnResumeGame;
             }
 
             /// <summary>
@@ -1886,6 +1972,20 @@ namespace Arcanys.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Unpause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnUnpause(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "ResumeGame" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnResumeGame(InputAction.CallbackContext context);
         }
     }
 }

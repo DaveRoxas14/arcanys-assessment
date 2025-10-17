@@ -22,11 +22,13 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
       }
       
       _inputHandler.Player.Enable();
+      _inputHandler.UI.Enable();
    }
 
    public void OnDisable()
    {
       _inputHandler?.Player.Disable();
+      _inputHandler?.UI.Disable();
    }
 
    #region Player Actions
@@ -122,6 +124,19 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
    {
    }
 
+   public void OnUnpause(InputAction.CallbackContext context)
+   {
+   }
+
+   public void OnResumeGame(InputAction.CallbackContext context)
+   {
+      if (context.performed)
+      {
+         PauseEvent?.Invoke();
+         Debug.Log("[Unpause] Success");
+      }
+   }
+
    #endregion
 
    #region Helper Functions
@@ -131,6 +146,9 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
       Debug.Log("[Input] Switched to UI input");
       _inputHandler.Player.Disable();
       _inputHandler.UI.Enable();
+      
+      Debug.Log($"_inputHandler.Player : { _inputHandler.Player.enabled}");
+      Debug.Log($"_inputHandler.UI : { _inputHandler.UI.enabled}");
    }
 
    public void SwitchToPlayer()
@@ -138,6 +156,9 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
       Debug.Log("[Input] Switched to Player input");
       _inputHandler.Player.Enable();
       _inputHandler.UI.Disable();
+      
+      Debug.Log($"_inputHandler.Player : { _inputHandler.Player.enabled}");
+      Debug.Log($"_inputHandler.UI : { _inputHandler.UI.enabled}");
    }
 
    #endregion
