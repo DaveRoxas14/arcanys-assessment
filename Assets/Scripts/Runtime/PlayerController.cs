@@ -1,7 +1,5 @@
-using System;
-using Arcanys.Input;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -135,7 +133,6 @@ public class PlayerController : MonoBehaviour
         var control = _isGrounded ? 1f : _airControlMultiplier;
         var targetVelocity = direction * (_moveSpeed * control);
 
-        // Smooth acceleration
         var horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
         horizontalVelocity = Vector3.Lerp(horizontalVelocity, targetVelocity, _acceleration * Time.deltaTime);
 
@@ -145,18 +142,14 @@ public class PlayerController : MonoBehaviour
             var gravityMultiplier = 1f;
 
             if (_velocity.y < 0)
-            {
                 gravityMultiplier = _fallMultiplier;
-            }
             else if (_velocity.y > 0 && !_isJumping)
-            {
                 // if jump button is releasd early
                 gravityMultiplier = _variableJumpMultiplier;
-            }
 
             _velocity.y += _gravity * gravityMultiplier * Time.deltaTime;
         }
-        
+
         _velocity.x = horizontalVelocity.x;
         _velocity.z = horizontalVelocity.z;
 
@@ -166,7 +159,7 @@ public class PlayerController : MonoBehaviour
         // Add rotation to character movement
         if (direction.sqrMagnitude > 0.001f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            var targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
     }
