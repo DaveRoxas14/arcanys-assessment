@@ -1,0 +1,16 @@
+{
+    "name": "Arcanys.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e3d73c0cac804b44db5fe787f4b0fdd4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
