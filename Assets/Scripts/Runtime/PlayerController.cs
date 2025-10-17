@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{ 
-    // References
+{
+    #region Serialized Members
+    
     [Header("References")]
     [SerializeField] private GameObject _playerObject;
     [SerializeField] private Transform _cameraTransform;
     
-    // Input Controller
     [Header("Input Reference")]
     [SerializeField] private InputReader _inputReader;
     
-    // Movement Controller
     [Header("Movement Handler")]
     [SerializeField] private CharacterController _movementController;
     
@@ -25,9 +24,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _acceleration = 12f;
-    [SerializeField] private float _rotationSpeed = 0.1f;
     [SerializeField] private float _airControlMultiplier = 0.5f;
-    [SerializeField] private float rotationSpeed = 12f;
+    [SerializeField] private float _rotationSpeed = 12f;
     
     [Header("Jump Settings")]
     [SerializeField] private float _jumpHeight = 2.5f;
@@ -36,9 +34,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _coyoteTime = 0.15f;
     [SerializeField] private float _jumpBufferTime = 0.1f;
     [SerializeField] private float _variableJumpMultiplier = 0.5f;
-    
-    
-    
+
+    #endregion
+
+    #region Private Members
+
     private Vector2 _moveInput;
     private float _turnSmoothVelocity;
     private bool _isJumping;
@@ -46,7 +46,10 @@ public class PlayerController : MonoBehaviour
     private float _lastGroundedTime;
     private float _lastJumpPressedTime;
     private Vector3 _velocity;
+
+    #endregion
     
+    #region Unity Function
 
     private void OnEnable()
     {
@@ -61,6 +64,18 @@ public class PlayerController : MonoBehaviour
         _inputReader.JumpEvent -= OnJump;
         _inputReader.JumpCanceledEvent -= OnJumpReleased;
     }
+    
+    private void Update()
+    {
+        HandleGroundCheck();
+        HandleTimers();
+        ApplyJump();
+        ApplyMovement();
+    }
+
+    #endregion
+
+    #region Movement Funtions
 
     private void OnMove(Vector2 value)
     {
@@ -78,14 +93,6 @@ public class PlayerController : MonoBehaviour
         _isJumping = false;
     }
     
-    private void Update()
-    {
-        HandleGroundCheck();
-        HandleTimers();
-        ApplyJump();
-        ApplyMovement();
-    }
-
     private void HandleTimers()
     {
         _lastGroundedTime -= Time.deltaTime;
@@ -107,7 +114,7 @@ public class PlayerController : MonoBehaviour
     
     private void ApplyMovement()
     {
-        var direction = Vector3.zero;
+        Vector3 direction;
         if (_cameraTransform)
         {
             var forward = _cameraTransform.forward;
@@ -160,7 +167,7 @@ public class PlayerController : MonoBehaviour
         if (direction.sqrMagnitude > 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -178,4 +185,11 @@ public class PlayerController : MonoBehaviour
             _lastGroundedTime = 0;
         }
     }
+    
+    #endregion
+    
+    
+   
+
+    
 }
