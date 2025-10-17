@@ -136,15 +136,14 @@ MonoBehaviour:
   _enableJump: 1
   _moveSpeed: 10
   _acceleration: 12
-  _rotationSpeed: 0.1
   _airControlMultiplier: 0.5
-  rotationSpeed: 12
+  _rotationSpeed: 12
   _jumpHeight: 2
-  _gravity: -9.81
+  _gravity: -12
   _fallMultiplier: 3
   _coyoteTime: 0.15
   _jumpBufferTime: 0.1
-  _variableJumpMultiplier: 0.7
+  _variableJumpMultiplier: 3
 --- !u!143 &357630153679929120
 CharacterController:
   m_ObjectHideFlags: 0

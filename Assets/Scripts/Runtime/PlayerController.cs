@@ -46,7 +46,18 @@ public class PlayerController : MonoBehaviour
     private Vector3 _velocity;
 
     #endregion
-    
+
+    #region Properties
+
+    public Transform CameraTransform
+    {
+        get => _cameraTransform;
+        set => _cameraTransform = value;
+    }
+
+    #endregion
+
+
     #region Unity Function
 
     private void OnEnable()
@@ -113,13 +124,13 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovement()
     {
         Vector3 direction;
-        if (_cameraTransform)
+        if (CameraTransform)
         {
-            var forward = _cameraTransform.forward;
+            var forward = CameraTransform.forward;
             forward.y = 0;
             forward.Normalize();
 
-            var right = _cameraTransform.right;
+            var right = CameraTransform.right;
             right.y = 0;
             right.Normalize();
 
