@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -16,8 +19,16 @@ namespace Game.Scripts.Runtime.GameOver
 
         [SerializeField] private Button _restartBtn;
         [SerializeField] private Button _quitGameBtn;
+        [SerializeField] private TextMeshProUGUI _text;
+
+        [Header("Settings")] 
+        [SerializeField] private string _winString;
+
+        [SerializeField] private string _loseString;
 
         private bool _gameOver;
+
+        #region Unity Functions
 
         public void OnEnable()
         {
@@ -32,14 +43,23 @@ namespace Game.Scripts.Runtime.GameOver
             _quitGameBtn.onClick.RemoveListener(QuitGame);
         }
 
+        #endregion
+
         public void GameOver(bool win)
         {
             if(_gameOver) return;
+
+            _text.text = win ? _winString : _loseString;
+            
+            // todo - SFX? VFX?
             
             _gameOver = true;
             _gameOverScreenObject.SetActive(true);
+            StartCoroutine(SelectDefaultButton());
             Time.timeScale = 0;
         }
+
+        #region Button Events
 
         private void QuitGame()
         {
@@ -57,5 +77,13 @@ namespace Game.Scripts.Runtime.GameOver
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Time.timeScale = 1;
         }
+        
+        private IEnumerator SelectDefaultButton()
+        {
+            yield return null;
+            EventSystem.current.SetSelectedGameObject(_restartBtn.gameObject);
+        }
+
+        #endregion
     }
 }

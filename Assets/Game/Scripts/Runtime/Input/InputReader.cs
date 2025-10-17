@@ -128,12 +128,14 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
 
    public void SwitchToUI()
    {
+      Debug.Log("[Input] Switched to UI input");
       _inputHandler.Player.Disable();
       _inputHandler.UI.Enable();
    }
 
    public void SwitchToPlayer()
    {
+      Debug.Log("[Input] Switched to Player input");
       _inputHandler.Player.Enable();
       _inputHandler.UI.Disable();
    }

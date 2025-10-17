@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,9 +15,18 @@ public class SceneNavigation : MonoBehaviour
     [SerializeField] private Button _playGameBtn;
     [SerializeField] private Button _settingsBtn;
     [SerializeField] private Button _quitBtn;
+    [SerializeField] private InputReader _inputReader;
 
     [Header("Settings")]
     [SerializeField] private int _sceneIndex;
+
+    #region Unity Functions
+
+    private void Start()
+    {
+        _inputReader.SwitchToUI();
+        StartCoroutine(SelectDefaultButton());
+    }
 
     private void OnEnable()
     {
@@ -27,6 +38,14 @@ public class SceneNavigation : MonoBehaviour
     {
         _playGameBtn.onClick.RemoveListener(LoadMainLevel);
         _quitBtn.onClick.RemoveListener(QuitGame);
+    }
+
+    #endregion
+    
+    private IEnumerator SelectDefaultButton()
+    {
+        yield return null;
+        EventSystem.current.SetSelectedGameObject(_playGameBtn.gameObject);
     }
 
     private void LoadMainLevel()
