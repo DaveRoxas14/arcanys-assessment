@@ -26,11 +26,23 @@
         {
             public const string SCORE_GEM_EFFECT = "Gem/Score Gem Effect";
         }
+        
+        public static class ANIMATIONS
+        {
+            public const string RUN = "Run";
+            public const string JUMP = "Jump";
+            public const string TAKE_DAMAGE = "Take Damage";
+            public const string ATTACK_1 = "Melee Right Attack 01";
+            public const string ATTACK_2 = "Melee Right Attack 02";
+            public const string ATTACK_3 = "Melee Right Attack 02";
+        }
 
         public static class INTEGERS
         {
             public const int MILLISECOND = 1000;
         }
+
+        
         
     }
 }

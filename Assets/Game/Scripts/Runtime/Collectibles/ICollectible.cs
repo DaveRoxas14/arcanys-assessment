@@ -4,6 +4,6 @@ namespace Arcanys.Collectibles
 {
     public interface ICollectible
     {
-        void UseCollectible(GameObject collector);
+        void UseCollectible(PlayerController collector);
     }
 }

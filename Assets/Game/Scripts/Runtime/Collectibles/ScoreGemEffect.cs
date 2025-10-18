@@ -7,9 +7,11 @@ namespace Arcanys.Collectibles
     public class ScoreGemEffectSo : CollectibleEffectSo
     {
         [SerializeField] private int scoreValue = 10;
-        public override void UseCollectible(GameObject collector)
+        public override void UseCollectible(PlayerController collector)
         {
             ScoringManager.Instance.AddScore(scoreValue);
+            
+            collector.OnScoreUpdated(scoreValue);
         }
     }
 }

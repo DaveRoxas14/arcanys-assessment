@@ -29,7 +29,7 @@ namespace Arcanys.Collectibles
         {
             if (!other.CompareTag(ArcanysConstants.TAGS.PLAYER)) return;
             
-            _effect.UseCollectible(other.gameObject);
+            _effect.UseCollectible(other.GetComponentInChildren<PlayerController>());
             PlaySfx();
             PlayVfx();
             

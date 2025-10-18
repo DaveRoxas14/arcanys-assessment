@@ -1,11 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Runtime.Enemies
 {
     [RequireComponent(typeof(CharacterController))]
     public abstract class EnemyBase : MonoBehaviour
     {
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
+        [SerializeField]protected Animator _animator;
+        
         [Header(ArcanysConstants.INSPECTOR.MOVEMENT)] 
         [SerializeField] protected float _moveSpeed = 3f;
         [SerializeField] protected float _chaseRange = 10f;
@@ -29,6 +33,8 @@ namespace Game.Scripts.Runtime.Enemies
         {
             _controller = GetComponent<CharacterController>();
             _player = GameManager.Instance.GetPlayer().transform;
+            
+            _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, true);
         }
         
         protected virtual void Update()
@@ -75,6 +81,21 @@ namespace Game.Scripts.Runtime.Enemies
             if (distance <= _attackRange && Time.time - _lastAttackTime >= _attackCooldown)
             {
                 Attack();
+                var rand = Random.Range(0, 3);
+                {
+                    switch (rand)
+                    {
+                        case 0:
+                            _animator.SetTrigger(ArcanysConstants.ANIMATIONS.ATTACK_1);
+                            break;
+                        case 1:
+                            _animator.SetTrigger(ArcanysConstants.ANIMATIONS.ATTACK_2);
+                            break;
+                        case 2:
+                            _animator.SetTrigger(ArcanysConstants.ANIMATIONS.ATTACK_3);
+                            break;
+                    }
+                }
                 _lastAttackTime = Time.time;
             }
         }

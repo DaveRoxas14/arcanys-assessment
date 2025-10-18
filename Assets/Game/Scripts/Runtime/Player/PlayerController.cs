@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
     [SerializeField] private GameObject _playerObject;
     [SerializeField] private Transform _cameraTransform;
+    [SerializeField] private Animator _animator;
     
     [Header(ArcanysConstants.INSPECTOR.INPUT_REFERENCE)]
     [SerializeField] private InputReader _inputReader;
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
         _inputReader.MoveEvent += OnMove;
         _inputReader.JumpEvent += OnJump;
         _inputReader.JumpCanceledEvent += OnJumpReleased;
+        _inputReader.StoppedMovingEvent += OnStoppedMoving;
     }
 
     private void OnDisable()
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
         _inputReader.MoveEvent -= OnMove;
         _inputReader.JumpEvent -= OnJump;
         _inputReader.JumpCanceledEvent -= OnJumpReleased;
+        _inputReader.StoppedMovingEvent -= OnStoppedMoving;
     }
     
     private void Update()
@@ -92,12 +95,23 @@ public class PlayerController : MonoBehaviour
     private void OnMove(Vector2 value)
     {
         _moveInput = value;
+
+        if (value.magnitude > 0)
+        {
+            _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, true);
+        }
+    }
+
+    private void OnStoppedMoving()
+    {
+        _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, false);
     }
 
     private void OnJump()
     {
         _lastJumpPressedTime = _jumpBufferTime;
         _isJumping = true;
+        _animator.SetTrigger(ArcanysConstants.ANIMATIONS.JUMP);
     }
 
     private void OnJumpReleased()
@@ -195,9 +209,18 @@ public class PlayerController : MonoBehaviour
     }
     
     #endregion
-    
-    
-   
+
+
+    #region Helpers
+
+    public void OnScoreUpdated(int value)
+    {
+        if(value >= 0) return;
+        
+        _animator.SetTrigger(ArcanysConstants.ANIMATIONS.TAKE_DAMAGE);
+    }
+
+    #endregion
 
     
 }

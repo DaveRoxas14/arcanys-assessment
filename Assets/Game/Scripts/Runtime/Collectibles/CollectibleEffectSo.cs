@@ -6,6 +6,6 @@ namespace Arcanys.Collectibles
     {
         [TextArea] [SerializeField] private string _description;
         
-        public abstract void UseCollectible(GameObject collector);
+        public abstract void UseCollectible(PlayerController collector);
     }
 }

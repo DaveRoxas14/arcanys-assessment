@@ -76,10 +76,16 @@ namespace Game.Scripts.Runtime.GameOver
 #endif
         }
 
-        private void RestartGame() // todo - make this next level if will have other levels
+        private async void RestartGame() // todo - make this next level if will have other levels
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            _restartBtn.interactable = false;
+            GameManager.Instance.IsRestarting = true;
             Time.timeScale = 1;
+            
+            await GameManager.Instance.FadeOut();
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
         
         private IEnumerator SelectDefaultButton()

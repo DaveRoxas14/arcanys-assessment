@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, PlayerInputHandler.IUIActions
 {
    public event Action<Vector2> MoveEvent;
+
+   public event Action StoppedMovingEvent;
    public event Action PauseEvent;
    public event Action JumpEvent;
    public event Action JumpCanceledEvent;
@@ -36,6 +38,11 @@ public class InputReader : ScriptableObject, PlayerInputHandler.IPlayerActions, 
    public void OnMove(InputAction.CallbackContext context)
    {
       MoveEvent?.Invoke(context.ReadValue<Vector2>());
+
+      if (context.canceled)
+      {
+         StoppedMovingEvent?.Invoke();
+      }
    }
    
    public void OnPause(InputAction.CallbackContext context)

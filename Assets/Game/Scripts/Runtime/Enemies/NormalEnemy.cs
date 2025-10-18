@@ -19,6 +19,7 @@ namespace Game.Scripts.Runtime.Enemies
             if (_isGrounded && Random.value < 0.01f)
             {
                 _velocity.y = _jumpForce;
+                _animator.SetTrigger(ArcanysConstants.ANIMATIONS.JUMP);
             }
         }
 
