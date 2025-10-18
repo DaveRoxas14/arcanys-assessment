@@ -34,11 +34,13 @@ namespace Game.Scripts.Runtime.Enemies
         protected bool _isAttacking;
         protected float _lastAttackTime;
         protected bool _isDead;
+        protected PlayerController _playerController;
 
         private void Start()
         {
             _controller = GetComponent<CharacterController>();
             _player = GameManager.Instance.GetPlayer().transform;
+            _playerController = _player.GetComponent<PlayerController>();
             
             _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, true);
         }
@@ -87,6 +89,7 @@ namespace Game.Scripts.Runtime.Enemies
             if (distance <= _attackRange && Time.time - _lastAttackTime >= _attackCooldown)
             {
                 Attack();
+                _playerController.OnHit();
                 AudioManager.Instance.PlaySFX(_hitSfx.clip);
                 var rand = Random.Range(0, 3);
                 {

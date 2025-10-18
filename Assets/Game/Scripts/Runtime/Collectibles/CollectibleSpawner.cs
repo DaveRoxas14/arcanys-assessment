@@ -31,7 +31,7 @@ namespace Arcanys.Collectibles
             }
             catch (Exception e)
             {
-                Debug.LogError("[Collectible Spawner] Something went wrong with spawning the collectible");
+                Debug.LogWarning("[Collectible Spawner] Something went wrong with spawning the collectible");
             }
         }
 

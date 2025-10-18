@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Game.Scripts.Runtime;
 using Game.Scripts.Runtime.Audio;
 using UnityEngine;
@@ -11,13 +12,20 @@ namespace Arcanys.Collectibles
     [RequireComponent(typeof(SphereCollider))]
     public class Gem : MonoBehaviour
     {
-        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)] [SerializeField]
+        private GameObject _model;
         [SerializeField]
         private SoundEffect _sfx;
+
+        [SerializeField]
+        private GameObject _vfx;
         
         [Header(ArcanysConstants.INSPECTOR.EFFECT)]
         [SerializeField] 
         private CollectibleEffectSo _effectBehavior;
+
+        [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
+        private int _delayBeforeDestroy = 1;
         
         private ICollectible _effect;
 
@@ -31,15 +39,16 @@ namespace Arcanys.Collectibles
                 Debug.LogError($"{name} has invalid effect!!");
         }
 
-        private void OnTriggerEnter(Collider other)
+        private async void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(ArcanysConstants.TAGS.PLAYER)) return;
             
             _effect.UseCollectible(other.GetComponentInChildren<PlayerController>());
             PlaySfx();
             PlayVfx();
+
+            await Task.Delay(_delayBeforeDestroy * ArcanysConstants.INTEGERS.MILLISECOND);
             
-            // todo - add sfx/vfx and delay the game object destroy...
             Destroy(gameObject);
         }
 
@@ -47,7 +56,8 @@ namespace Arcanys.Collectibles
 
         private void PlayVfx()
         {
-            
+            _model.SetActive(false);
+            _vfx.SetActive(true);
         }
 
         private void PlaySfx()

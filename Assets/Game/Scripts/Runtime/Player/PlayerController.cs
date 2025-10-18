@@ -1,7 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using Game.Scripts.Runtime;
 using Game.Scripts.Runtime.Audio;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private Animator _animator;
     [SerializeField] private SoundEffect _jumpSfx;
+    [SerializeField] private SoundEffect _footstep1Sfx;
+    [SerializeField] private SoundEffect _footstep2Sfx;
+    [SerializeField] private GameObject _hitVFX;
     
     [Header(ArcanysConstants.INSPECTOR.INPUT_REFERENCE)]
     [SerializeField] private InputReader _inputReader;
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
     [SerializeField] private bool _enableMove;
     [SerializeField] private bool _enableJump;
+    [SerializeField] private int _hitVfxCooldown = 1;
     
     [Header(ArcanysConstants.INSPECTOR.MOVEMENT_SETTINGS)]
     [SerializeField] private float _moveSpeed;
@@ -49,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private float _lastGroundedTime;
     private float _lastJumpPressedTime;
     private Vector3 _velocity;
+    private bool isHit;
+
 
     #endregion
 
@@ -101,6 +109,18 @@ public class PlayerController : MonoBehaviour
         if (value.magnitude > 0)
         {
             _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, true);
+
+            var rand = Random.Range(0, 2);
+            
+            switch (rand)
+            {
+                case 0:
+                    AudioManager.Instance.PlaySFX(_footstep1Sfx.clip);
+                    break;
+                case 1:
+                    AudioManager.Instance.PlaySFX(_footstep2Sfx.clip);
+                    break;
+            }
         }
     }
 
@@ -221,6 +241,27 @@ public class PlayerController : MonoBehaviour
         if(value >= 0) return;
         
         _animator.SetTrigger(ArcanysConstants.ANIMATIONS.TAKE_DAMAGE);
+    }
+
+    public async void OnHit()
+    {
+        try
+        {
+            if(isHit) return;
+
+            isHit = true;
+            _animator.SetTrigger(ArcanysConstants.ANIMATIONS.TAKE_DAMAGE);
+            _hitVFX.SetActive(true);
+
+            await Task.Delay(_hitVfxCooldown * ArcanysConstants.INTEGERS.MILLISECOND);
+
+            _hitVFX.SetActive(false);
+            isHit = false;
+        }
+        catch (Exception e)
+        {
+            // TODO handle exception
+        }
     }
 
     #endregion
