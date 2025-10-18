@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Arcanys.Collectibles;
 using Game.Scripts.Runtime.GameOver;
 using Game.Scripts.Runtime.GameTimer;
 using Game.Scripts.Runtime.UI;
@@ -20,6 +21,7 @@ namespace Game.Scripts.Runtime
 
         [SerializeField] private GameTime _time;
         [SerializeField] private Fader _gameStartFade;
+        [SerializeField] private GemSpawnManager _gemSpawnManager;
         
         [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
         [SerializeField] private int _scoreToWin = 100;
@@ -61,6 +63,8 @@ namespace Game.Scripts.Runtime
         {
             ScoringManager.Instance.OnScoreChanged += OnScoreChanged;
             _time.OnTimerEnd += OnTimerFinished;
+
+            await _gemSpawnManager.StartSpawningGems();
 
             await FadeIn();
             

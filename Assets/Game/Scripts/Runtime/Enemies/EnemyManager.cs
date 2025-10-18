@@ -17,14 +17,17 @@ namespace Game.Scripts.Runtime.Enemies
         [SerializeField] private int _numberOfEnemiesToSpawn = 5;
         [SerializeField] private float _spawnRadius = 10f;
         [SerializeField] private int _spawnDelay = 3;
+        [SerializeField] private int _initialSpawnDelay = 3;
 
         private async void Start()
         {
             try
             {
+                await Task.Delay(_initialSpawnDelay * ArcanysConstants.INTEGERS.MILLISECOND);
+                
                 for (var i = 0; i < _numberOfEnemiesToSpawn; i++)
                 {
-                    var delay = _spawnDelay * 1000;
+                    var delay = _spawnDelay * ArcanysConstants.INTEGERS.MILLISECOND;
                     await Task.Delay(delay);
                     
                     if (!transform) break;

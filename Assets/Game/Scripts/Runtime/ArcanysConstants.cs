@@ -26,6 +26,11 @@
         {
             public const string SCORE_GEM_EFFECT = "Gem/Score Gem Effect";
         }
+
+        public static class INTEGERS
+        {
+            public const int MILLISECOND = 1000;
+        }
         
     }
 }

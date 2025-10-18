@@ -17,13 +17,9 @@ namespace Arcanys.Collectibles
         [SerializeField] private bool _showGizmos;
 
         [SerializeField] private Color _gizmoColor = new (1, 1, 0, 0.75F);
+        
 
-        private void Start()
-        {
-            SpawnCollectible(0);
-        }
-
-        public async void SpawnCollectible(int delay)
+        public async Task SpawnCollectible(int delay)
         {
             try
             {
