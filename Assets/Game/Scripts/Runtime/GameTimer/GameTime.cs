@@ -7,8 +7,10 @@ namespace Game.Scripts.Runtime.GameTimer
     {
         public event Action<float> OnTimerTick;
         public event Action OnTimerEnd;
-        
-        
+
+
+        #region Members
+
         private float _timeRemaining;
         private bool _isRunning;
         private float _duration;
@@ -18,6 +20,10 @@ namespace Game.Scripts.Runtime.GameTimer
         public float TimeRemaining => _timeRemaining;
         
         public float Progress => 1f - (_timeRemaining / _duration);
+
+        #endregion
+
+        #region Unity Functions
 
         private void Update()
         {
@@ -32,6 +38,10 @@ namespace Game.Scripts.Runtime.GameTimer
                 OnTimerEnd?.Invoke();
             }
         }
+
+        #endregion
+
+        #region Timer Helpers
 
         public void StartTimer(float newDuration = -1f)
         {
@@ -51,5 +61,7 @@ namespace Game.Scripts.Runtime.GameTimer
             _isRunning = false;
             _timeRemaining = 0f;
         }
+
+        #endregion
     }
 }

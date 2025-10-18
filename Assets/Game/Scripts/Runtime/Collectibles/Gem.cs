@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.Runtime;
 using UnityEngine;
 
 namespace Arcanys.Collectibles
@@ -9,7 +10,7 @@ namespace Arcanys.Collectibles
     [RequireComponent(typeof(SphereCollider))]
     public class Gem : MonoBehaviour
     {
-        [Header("Effect")]
+        [Header(ArcanysConstants.INSPECTOR.EFFECT)]
         [SerializeField] private CollectibleEffectSo _effectBehavior;
         
         private ICollectible _effect;
@@ -26,7 +27,7 @@ namespace Arcanys.Collectibles
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player")) return;
+            if (!other.CompareTag(ArcanysConstants.TAGS.PLAYER)) return;
             
             _effect.UseCollectible(other.gameObject);
             PlaySfx();

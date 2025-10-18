@@ -10,10 +10,10 @@ namespace Game.Scripts.Runtime.Enemies
     /// </summary>
     public class EnemyManager : MonoBehaviour
     {
-        [Header("References")]
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField] private EnemyBase _enemyPrefab;
         
-        [Header("Settings")]
+        [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
         [SerializeField] private int _numberOfEnemiesToSpawn = 5;
         [SerializeField] private float _spawnRadius = 10f;
         [SerializeField] private int _spawnDelay = 3;

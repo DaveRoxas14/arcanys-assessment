@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Game.Scripts.Runtime;
+using UnityEngine;
 
 namespace Arcanys.Collectibles
 {
-    [CreateAssetMenu(menuName = "Gem/Score Gem Effect")]
+    [CreateAssetMenu(menuName = ArcanysConstants.MENU_NAME.SCORE_GEM_EFFECT)]
     public class ScoreGemEffectSo : CollectibleEffectSo
     {
         [SerializeField] private int scoreValue = 10;

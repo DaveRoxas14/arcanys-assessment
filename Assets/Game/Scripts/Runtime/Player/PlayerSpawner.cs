@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Runtime;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class PlayerSpawner : MonoBehaviour
 {
    #region Members
 
+   [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
    [SerializeField] private GameObject _playerPrefab;
    [SerializeField] private Transform _spawnPoint;
    [SerializeField] private CinemachineCamera _camera;

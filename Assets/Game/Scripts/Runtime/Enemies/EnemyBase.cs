@@ -6,7 +6,7 @@ namespace Game.Scripts.Runtime.Enemies
     [RequireComponent(typeof(CharacterController))]
     public abstract class EnemyBase : MonoBehaviour
     {
-        [Header("Movement")] 
+        [Header(ArcanysConstants.INSPECTOR.MOVEMENT)] 
         [SerializeField] protected float _moveSpeed = 3f;
         [SerializeField] protected float _chaseRange = 10f;
         [SerializeField] protected float _attackRange = 10f;
@@ -14,7 +14,7 @@ namespace Game.Scripts.Runtime.Enemies
         [SerializeField] protected float _gravity = -9.8f;
         [SerializeField] protected float _airControlMultiplier = 0.5f;
 
-        [Header("Attack")] 
+        [Header(ArcanysConstants.INSPECTOR.ATTACK)] 
         [SerializeField] protected int _damage = 10;
         [SerializeField] protected float _attackCooldown = 1.5f;
         

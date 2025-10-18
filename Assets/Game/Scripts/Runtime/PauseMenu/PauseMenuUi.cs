@@ -12,7 +12,7 @@ namespace Game.Scripts.Runtime.PauseMenu
     {
         #region Members
 
-        [Header("References")] 
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)] 
         [SerializeField] private GameObject _pauseMenuObject;
         [SerializeField] private Button _resumeBtn;
         [SerializeField] private Button _restartBtn;

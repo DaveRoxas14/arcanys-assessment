@@ -14,14 +14,14 @@ namespace Game.Scripts.Runtime
 
         #region Members
 
-        [Header("References")] 
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)] 
         [SerializeField]
         private GameOverUI _gameOverUI;
 
         [SerializeField] private GameTime _time;
         [SerializeField] private Fader _gameStartFade;
         
-        [Header("Settings")]
+        [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
         [SerializeField] private int _scoreToWin = 100;
         [SerializeField] private int _scoreToLose;
 

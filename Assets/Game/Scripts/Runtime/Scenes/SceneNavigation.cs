@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading;
+using Game.Scripts.Runtime;
 using Game.Scripts.Runtime.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,14 +16,14 @@ public class SceneNavigation : MonoBehaviour
 {
     #region Members
 
-    [Header("References")]
+    [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
     [SerializeField] private Button _playGameBtn;
     [SerializeField] private Button _settingsBtn;
     [SerializeField] private Button _quitBtn;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private Fader _gameStartFade;
 
-    [Header("Settings")]
+    [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
     [SerializeField] private int _sceneIndex;
 
     #endregion

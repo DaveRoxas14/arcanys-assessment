@@ -15,7 +15,7 @@ namespace Game.Scripts.Runtime.GameOver
     {
         #region Members
 
-        [Header("References")] 
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)] 
         [SerializeField]
         private GameObject _gameOverScreenObject;
 
@@ -23,7 +23,7 @@ namespace Game.Scripts.Runtime.GameOver
         [SerializeField] private Button _quitGameBtn;
         [SerializeField] private TextMeshProUGUI _text;
 
-        [Header("Settings")] 
+        [Header(ArcanysConstants.INSPECTOR.SETTINGS)] 
         [SerializeField] private string _winString;
 
         [SerializeField] private string _loseString;

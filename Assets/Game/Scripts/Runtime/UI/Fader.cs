@@ -7,7 +7,7 @@ namespace Game.Scripts.Runtime.UI
 {
     public class Fader : MonoBehaviour
     {
-        [Header("References")]
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField] 
         private Image _imageToFade;
 

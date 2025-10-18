@@ -1,3 +1,4 @@
+using Game.Scripts.Runtime;
 using Game.Scripts.Runtime.PauseMenu;
 using UnityEngine;
 
@@ -5,6 +6,7 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
     
+    [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private PauseMenuUi _pauseMenuUi;
 

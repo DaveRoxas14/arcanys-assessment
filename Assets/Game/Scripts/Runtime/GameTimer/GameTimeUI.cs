@@ -6,7 +6,7 @@ namespace Game.Scripts.Runtime.GameTimer
 {
     public class GameTimeUI : MonoBehaviour
     {
-        [Header("References")]
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField]
         private TextMeshProUGUI _timerText;
         private void Start()

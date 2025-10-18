@@ -6,6 +6,7 @@ namespace Game.Scripts.Runtime.Scoring
 {
     public class ScoreUi : MonoBehaviour, IDisposable
     {
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField] private TextMeshProUGUI _scoreText;
 
         private int _gameToWin;

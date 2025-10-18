@@ -7,27 +7,27 @@ public class PlayerController : MonoBehaviour
 {
     #region Serialized Members
     
-    [Header("References")]
+    [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
     [SerializeField] private GameObject _playerObject;
     [SerializeField] private Transform _cameraTransform;
     
-    [Header("Input Reference")]
+    [Header(ArcanysConstants.INSPECTOR.INPUT_REFERENCE)]
     [SerializeField] private InputReader _inputReader;
     
-    [Header("Movement Handler")]
+    [Header(ArcanysConstants.INSPECTOR.MOVEMENT_HANDLER)]
     [SerializeField] private CharacterController _movementController;
     
-    [Header("Settings")]
+    [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
     [SerializeField] private bool _enableMove;
     [SerializeField] private bool _enableJump;
     
-    [Header("Movement Settings")]
+    [Header(ArcanysConstants.INSPECTOR.MOVEMENT_SETTINGS)]
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _acceleration = 12f;
     [SerializeField] private float _airControlMultiplier = 0.5f;
     [SerializeField] private float _rotationSpeed = 12f;
     
-    [Header("Jump Settings")]
+    [Header(ArcanysConstants.INSPECTOR.JUMP_SETTINGS)]
     [SerializeField] private float _jumpHeight = 2.5f;
     [SerializeField] private float _gravity = -9.81f;
     [SerializeField] private float _fallMultiplier = 2.0f;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Game.Scripts.Runtime;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,11 +9,11 @@ namespace Arcanys.Collectibles
 {
     public class CollectibleSpawner : MonoBehaviour
     {
-        [Header("References")] 
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)] 
         [SerializeField]
         private List<GameObject> _collectiblePrefabs = new ();
 
-        [Header("Debug")] 
+        [Header(ArcanysConstants.INSPECTOR.DEBUG)] 
         [SerializeField] private bool _showGizmos;
 
         [SerializeField] private Color _gizmoColor = new (1, 1, 0, 0.75F);
