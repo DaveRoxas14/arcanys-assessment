@@ -15,6 +15,7 @@
             public const string MOVEMENT_HANDLER = "Movement Handler";
             public const string MOVEMENT_SETTINGS = "Movement Settings";
             public const string JUMP_SETTINGS = "Jump Settings";
+            public const string AUDIO_SOURCES = "Audio Sources";
         }
 
         public static class TAGS
@@ -25,6 +26,7 @@
         public static class MENU_NAME
         {
             public const string SCORE_GEM_EFFECT = "Gem/Score Gem Effect";
+            public const string SOUND_EFFECT = "Audio/SoundEffect";
         }
         
         public static class ANIMATIONS

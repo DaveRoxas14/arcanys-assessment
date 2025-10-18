@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Game.Scripts.Runtime.Audio;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,7 +10,9 @@ namespace Game.Scripts.Runtime.Enemies
     public abstract class EnemyBase : MonoBehaviour
     {
         [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
-        [SerializeField]protected Animator _animator;
+        [SerializeField] protected Animator _animator;
+
+        [SerializeField] protected SoundEffect _hitSfx;
         
         [Header(ArcanysConstants.INSPECTOR.MOVEMENT)] 
         [SerializeField] protected float _moveSpeed = 3f;
@@ -84,6 +87,7 @@ namespace Game.Scripts.Runtime.Enemies
             if (distance <= _attackRange && Time.time - _lastAttackTime >= _attackCooldown)
             {
                 Attack();
+                AudioManager.Instance.PlaySFX(_hitSfx.clip);
                 var rand = Random.Range(0, 3);
                 {
                     switch (rand)

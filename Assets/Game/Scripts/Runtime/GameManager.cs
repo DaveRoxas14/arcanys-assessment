@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Arcanys.Collectibles;
+using Game.Scripts.Runtime.Audio;
 using Game.Scripts.Runtime.GameOver;
 using Game.Scripts.Runtime.GameTimer;
 using Game.Scripts.Runtime.UI;
@@ -22,6 +23,9 @@ namespace Game.Scripts.Runtime
         [SerializeField] private GameTime _time;
         [SerializeField] private Fader _gameStartFade;
         [SerializeField] private GemSpawnManager _gemSpawnManager;
+        [SerializeField] private SoundEffect _bgm;
+        [SerializeField] private SoundEffect _winBgm;
+        [SerializeField] private SoundEffect _loseBgm;
         
         [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
         [SerializeField] private int _scoreToWin = 100;
@@ -69,6 +73,7 @@ namespace Game.Scripts.Runtime
             await FadeIn();
             
             GameTime.StartTimer(_gameTime);
+            AudioManager.Instance.PlayBGM(_bgm.clip, true);
         }
 
         #endregion
@@ -99,6 +104,7 @@ namespace Game.Scripts.Runtime
             _isGameOver = true;
             InputManager.Instance.SwitchToUIControls();
             _gameOverUI.GameOver(true);
+            AudioManager.Instance.PlayBGM(_winBgm.clip);
         }
 
         private void LoseGame()
@@ -108,6 +114,7 @@ namespace Game.Scripts.Runtime
             _isGameOver = true;
             InputManager.Instance.SwitchToUIControls();
             _gameOverUI.GameOver(false);
+            AudioManager.Instance.PlayBGM(_loseBgm.clip);
         }
 
         #region Helpers

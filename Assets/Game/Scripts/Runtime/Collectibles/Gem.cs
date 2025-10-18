@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Scripts.Runtime;
+using Game.Scripts.Runtime.Audio;
 using UnityEngine;
 
 namespace Arcanys.Collectibles
@@ -10,8 +11,13 @@ namespace Arcanys.Collectibles
     [RequireComponent(typeof(SphereCollider))]
     public class Gem : MonoBehaviour
     {
+        [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
+        [SerializeField]
+        private SoundEffect _sfx;
+        
         [Header(ArcanysConstants.INSPECTOR.EFFECT)]
-        [SerializeField] private CollectibleEffectSo _effectBehavior;
+        [SerializeField] 
+        private CollectibleEffectSo _effectBehavior;
         
         private ICollectible _effect;
 
@@ -46,7 +52,7 @@ namespace Arcanys.Collectibles
 
         private void PlaySfx()
         {
-           
+           AudioManager.Instance.PlaySFX(_sfx.clip);
         }
     }
 }

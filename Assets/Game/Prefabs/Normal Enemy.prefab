@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Arcanys.Runtime::Game.Scripts.Runtime.Enemies.NormalEnemy
   _animator: {fileID: 2317876587629513029}
+  _hitSfx: {fileID: 11400000, guid: d9cc51600f7d90649aa47d48abfc41ef, type: 2}
   _moveSpeed: 6
   _chaseRange: 100
   _attackRange: 1.5

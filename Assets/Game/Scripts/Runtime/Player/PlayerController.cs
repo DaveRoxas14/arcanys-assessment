@@ -1,5 +1,6 @@
 using System;
 using Game.Scripts.Runtime;
+using Game.Scripts.Runtime.Audio;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject _playerObject;
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private Animator _animator;
+    [SerializeField] private SoundEffect _jumpSfx;
     
     [Header(ArcanysConstants.INSPECTOR.INPUT_REFERENCE)]
     [SerializeField] private InputReader _inputReader;
@@ -205,6 +207,7 @@ public class PlayerController : MonoBehaviour
             _isJumping = true;
             _lastJumpPressedTime = 0;
             _lastGroundedTime = 0;
+            AudioManager.Instance.PlaySFX(_jumpSfx.clip);
         }
     }
     

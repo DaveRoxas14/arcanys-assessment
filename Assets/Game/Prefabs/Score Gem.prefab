@@ -67,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358c4870788e487285c1754ee278c51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arcanys.Runtime::Arcanys.Collectibles.Gem
+  _sfx: {fileID: 11400000, guid: 1fc607bc1adacc04892ae204d2104453, type: 2}
   _effectBehavior: {fileID: 11400000, guid: 8dffff8ecc8719d4d897952b1bff05b1, type: 2}
 --- !u!1 &8279417050318730750
 GameObject:
