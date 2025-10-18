@@ -27,7 +27,10 @@ namespace Game.Scripts.Runtime.GameTimer
 
         private void OnTimerTick(float timeLeft)
         {
-            _timerText.text = $"{timeLeft:0}";
+            float minutes = Mathf.FloorToInt(timeLeft / 60);
+            float seconds = Mathf.FloorToInt(timeLeft % 60);
+            
+            _timerText.text = $"{minutes:00}:{seconds:00}";
 
             if (timeLeft <= 5f)
             {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Evil Gem Effect
   m_EditorClassIdentifier: Arcanys.Runtime::Arcanys.Collectibles.ScoreGemEffectSo
   _description: Removes points from players
-  scoreValue: -30
+  scoreValue: 10

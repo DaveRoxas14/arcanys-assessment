@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Game.Scripts.Runtime.GameOver;
 using Game.Scripts.Runtime.GameTimer;
+using Game.Scripts.Runtime.UI;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime
@@ -16,6 +19,7 @@ namespace Game.Scripts.Runtime
         private GameOverUI _gameOverUI;
 
         [SerializeField] private GameTime _time;
+        [SerializeField] private Fader _gameStartFade;
         
         [Header("Settings")]
         [SerializeField] private int _scoreToWin = 100;
@@ -24,6 +28,7 @@ namespace Game.Scripts.Runtime
         [SerializeField] private float _gameTime;
 
         private bool _isGameOver;
+        private bool _isRestarting;
         private PlayerController _player;
 
         public bool IsGameOver => _isGameOver;
@@ -33,6 +38,12 @@ namespace Game.Scripts.Runtime
         public int ScoreToWin => _scoreToWin;
 
         public int ScoreToLose => _scoreToLose;
+
+        public bool IsRestarting
+        {
+            get => _isRestarting;
+            set => _isRestarting = value;
+        }
 
         #endregion
 
@@ -46,10 +57,13 @@ namespace Game.Scripts.Runtime
                 Instance = this;
         }
 
-        public void Start()
+        public async void Start()
         {
             ScoringManager.Instance.OnScoreChanged += OnScoreChanged;
             _time.OnTimerEnd += OnTimerFinished;
+
+            await FadeIn();
+            
             GameTime.StartTimer(_gameTime);
         }
 
@@ -57,6 +71,8 @@ namespace Game.Scripts.Runtime
 
         private void OnScoreChanged(int score)
         {
+            if(IsRestarting) return;
+            
             if (score >= ScoreToWin)
             {
                 WinGame();
@@ -100,6 +116,32 @@ namespace Game.Scripts.Runtime
         public PlayerController GetPlayer()
         {
             return _player;
+        }
+        
+        public async Task FadeIn()
+        {
+            try
+            {
+                var cts = new CancellationTokenSource();
+                await _gameStartFade.FadeImage(1f, 0f, 1, cts.Token);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        
+        public async Task FadeOut()
+        {
+            try
+            {
+                var cts = new CancellationTokenSource();
+                await _gameStartFade.FadeImage(0f, 1f, 1, cts.Token);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
         #endregion

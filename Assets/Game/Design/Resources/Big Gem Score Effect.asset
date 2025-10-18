@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Big Gem Score Effect
   m_EditorClassIdentifier: Arcanys.Runtime::Arcanys.Collectibles.ScoreGemEffectSo
   _description: Gives players points
-  scoreValue: 20
+  scoreValue: 10

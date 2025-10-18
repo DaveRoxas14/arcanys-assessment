@@ -154,9 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Arcanys.Runtime::Game.Scripts.Runtime.Enemies.NormalEnemy
   _moveSpeed: 6
   _chaseRange: 100
-  _attackRange: 2
-  _jumpForce: 5
+  _attackRange: 1.5
+  _jumpForce: 7
   _gravity: -9.8
   _airControlMultiplier: 0.5
-  _damage: 10
+  _damage: 2
   _attackCooldown: 1.5

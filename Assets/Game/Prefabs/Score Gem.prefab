@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 585077557054216149}
   - component: {fileID: 1467011676429181616}
   - component: {fileID: 2516558370598411446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Score Gem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5318169188722931508}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 3.95}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81,9 +81,8 @@ GameObject:
   - component: {fileID: 327827988346325021}
   - component: {fileID: 329696545690153899}
   - component: {fileID: 1192093178741725378}
-  - component: {fileID: 294497058557394177}
   - component: {fileID: 4886513256576008246}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34143,28 +34142,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8279417050318730750}
-  m_Mesh: {fileID: 0}
---- !u!64 &294497058557394177
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8279417050318730750}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!95 &4886513256576008246
 Animator:

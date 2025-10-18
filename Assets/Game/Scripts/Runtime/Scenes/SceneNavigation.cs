@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Threading;
+using Game.Scripts.Runtime.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,6 +20,7 @@ public class SceneNavigation : MonoBehaviour
     [SerializeField] private Button _settingsBtn;
     [SerializeField] private Button _quitBtn;
     [SerializeField] private InputReader _inputReader;
+    [SerializeField] private Fader _gameStartFade;
 
     [Header("Settings")]
     [SerializeField] private int _sceneIndex;
@@ -26,10 +29,21 @@ public class SceneNavigation : MonoBehaviour
 
     #region Unity Functions
 
-    private void Start()
+    private async void Start()
     {
-        _inputReader.SwitchToUI();
-        StartCoroutine(SelectDefaultButton());
+        try
+        {
+            _inputReader.SwitchToUI();
+            StartCoroutine(SelectDefaultButton());
+            
+            var cts = new CancellationTokenSource();
+            await _gameStartFade.FadeImage(1f, 0f, 1, cts.Token);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
     private void OnEnable()
@@ -54,9 +68,21 @@ public class SceneNavigation : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(_playGameBtn.gameObject);
     }
 
-    private void LoadMainLevel()
+    private async void LoadMainLevel()
     {
-        SceneManager.LoadScene(_sceneIndex);
+        try
+        {
+            var cts = new CancellationTokenSource();
+            await _gameStartFade.FadeImage(0f, 1f, 1f, cts.Token);
+            
+            SceneManager.LoadScene(_sceneIndex);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+        
     }
 
     private void QuitGame()
