@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,6 +20,8 @@ namespace Game.Scripts.Runtime.Enemies
         [SerializeField] private int _spawnDelay = 3;
         [SerializeField] private int _initialSpawnDelay = 3;
 
+        private List<EnemyBase> _enemyList = new List<EnemyBase>();
+
         private async void Start()
         {
             try
@@ -34,7 +37,10 @@ namespace Game.Scripts.Runtime.Enemies
 
                     var pos = transform.position + Random.insideUnitSphere * _spawnRadius;
                     pos.y = transform.position.y;
-                    Instantiate(_enemyPrefab, pos, Quaternion.identity);
+
+                    var enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity);
+                    
+                    _enemyList.Add(enemy); 
                 }
             }
             catch (Exception e)

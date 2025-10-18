@@ -35,6 +35,7 @@
             public const string ATTACK_1 = "Melee Right Attack 01";
             public const string ATTACK_2 = "Melee Right Attack 02";
             public const string ATTACK_3 = "Melee Right Attack 02";
+            public const string DIE = "Die";
         }
 
         public static class INTEGERS

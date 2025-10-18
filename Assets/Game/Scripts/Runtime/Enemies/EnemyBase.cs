@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,7 @@ namespace Game.Scripts.Runtime.Enemies
         [SerializeField] protected float _jumpForce = 5f;
         [SerializeField] protected float _gravity = -9.8f;
         [SerializeField] protected float _airControlMultiplier = 0.5f;
+        [SerializeField] protected int _deathDelay = 1;
 
         [Header(ArcanysConstants.INSPECTOR.ATTACK)] 
         [SerializeField] protected int _damage = 10;
@@ -28,6 +30,7 @@ namespace Game.Scripts.Runtime.Enemies
         protected bool _isGrounded;
         protected bool _isAttacking;
         protected float _lastAttackTime;
+        protected bool _isDead;
 
         private void Start()
         {
@@ -39,7 +42,7 @@ namespace Game.Scripts.Runtime.Enemies
         
         protected virtual void Update()
         {
-            if (!_player) return;
+            if (!_player || _isDead) return;
 
             Move();
             AttackWhenInDistance();
@@ -97,6 +100,23 @@ namespace Game.Scripts.Runtime.Enemies
                     }
                 }
                 _lastAttackTime = Time.time;
+            }
+        }
+
+        public async void KillEnemy()
+        {
+            try
+            {
+                _animator.SetTrigger(ArcanysConstants.ANIMATIONS.DIE);
+                _isDead = true;
+
+                await Task.Delay(_deathDelay * ArcanysConstants.INTEGERS.MILLISECOND);
+                
+                Destroy(gameObject);
+            }
+            catch (Exception e)
+            {
+                // ignored
             }
         }
 
