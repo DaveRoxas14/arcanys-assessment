@@ -128,6 +128,11 @@ namespace Game.Scripts.Runtime
         {
             return _player;
         }
+
+        public bool IsPlayerGrounded()
+        {
+            return _player.IsGrounded;
+        }
         
         public async Task FadeIn()
         {

@@ -479,13 +479,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 435836, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6214796914343543760}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 110538, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5252368658335464289}
   m_SourcePrefab: {fileID: 100100000, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}
 --- !u!95 &6271941319760817153 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9590276, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}
   m_PrefabInstance: {fileID: 6271941319768308229}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6271941319768397263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110538, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}
+  m_PrefabInstance: {fileID: 6271941319768308229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5252368658335464289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271941319768397263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea360a2c5324047a5670489e492ab4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Arcanys.Runtime::Game.Scripts.Runtime.Audio.FootstepHandler
+  _footstep1Sfx: {fileID: 11400000, guid: b190c0fb591760246a7066839f03e264, type: 2}
+  _footstep2Sfx: {fileID: 11400000, guid: db5d33afaa7ce0e4c869269d83005de8, type: 2}
+  _footstepCooldown: 1
 --- !u!4 &6271941319768445763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 452934, guid: 334894e0f34cfdb4da833819761f5a87, type: 3}

@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _cameraTransform;
     [SerializeField] private Animator _animator;
     [SerializeField] private SoundEffect _jumpSfx;
-    [SerializeField] private SoundEffect _footstep1Sfx;
-    [SerializeField] private SoundEffect _footstep2Sfx;
     [SerializeField] private GameObject _hitVFX;
     
     [Header(ArcanysConstants.INSPECTOR.INPUT_REFERENCE)]
@@ -56,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private float _lastJumpPressedTime;
     private Vector3 _velocity;
     private bool isHit;
-
+    private bool playingFootstep;
 
     #endregion
 
@@ -67,6 +65,8 @@ public class PlayerController : MonoBehaviour
         get => _cameraTransform;
         set => _cameraTransform = value;
     }
+
+    public bool IsGrounded => _isGrounded;
 
     #endregion
 
@@ -109,18 +109,6 @@ public class PlayerController : MonoBehaviour
         if (value.magnitude > 0)
         {
             _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, true);
-
-            var rand = Random.Range(0, 2);
-            
-            switch (rand)
-            {
-                case 0:
-                    AudioManager.Instance.PlaySFX(_footstep1Sfx.clip);
-                    break;
-                case 1:
-                    AudioManager.Instance.PlaySFX(_footstep2Sfx.clip);
-                    break;
-            }
         }
     }
 
@@ -129,6 +117,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(ArcanysConstants.ANIMATIONS.RUN, false);
     }
 
+    
     private void OnJump()
     {
         _lastJumpPressedTime = _jumpBufferTime;
@@ -151,12 +140,12 @@ public class PlayerController : MonoBehaviour
     {
         _isGrounded = _movementController.isGrounded;
 
-        if (_isGrounded && _velocity.y < 0)
+        if (IsGrounded && _velocity.y < 0)
         {
             _velocity.y = -2f;
         }
 
-        if (_isGrounded)
+        if (IsGrounded)
             _lastGroundedTime = _coyoteTime;
     }
     
@@ -181,14 +170,14 @@ public class PlayerController : MonoBehaviour
             direction = new Vector3(_moveInput.x, 0, _moveInput.y);
         }
 
-        var control = _isGrounded ? 1f : _airControlMultiplier;
+        var control = IsGrounded ? 1f : _airControlMultiplier;
         var targetVelocity = direction * (_moveSpeed * control);
 
         var horizontalVelocity = new Vector3(_velocity.x, 0, _velocity.z);
         horizontalVelocity = Vector3.Lerp(horizontalVelocity, targetVelocity, _acceleration * Time.deltaTime);
 
         // Apply gravity...
-        if (!_isGrounded)
+        if (!IsGrounded)
         {
             var gravityMultiplier = 1f;
 
@@ -260,7 +249,7 @@ public class PlayerController : MonoBehaviour
         }
         catch (Exception e)
         {
-            // TODO handle exception
+            // ignore this
         }
     }
 

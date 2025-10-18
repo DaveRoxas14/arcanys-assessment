@@ -49,7 +49,8 @@ namespace Arcanys.Collectibles
 
             await Task.Delay(_delayBeforeDestroy * ArcanysConstants.INTEGERS.MILLISECOND);
             
-            Destroy(gameObject);
+            if(gameObject)
+                Destroy(gameObject);
         }
 
         #endregion

@@ -9,11 +9,13 @@ namespace Game.Scripts.Runtime.Audio
         [Header(ArcanysConstants.INSPECTOR.AUDIO_SOURCES)]
         [SerializeField] private AudioSource _bgmSource;
         [SerializeField] private AudioSource _sfxSource;
+        [SerializeField] private AudioSource _footstepSource;
         
         [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
         [Range(0f, 1f)] public float _masterVolume = 1f;
         [Range(0f, 1f)] public float _bgmVolume = 1f;
         [Range(0f, 1f)] public float _sfxVolume = 1f;
+        [Range(0f, 1f)] public float _footstepVolume = 0.5f;
         
         private void Awake()
         {
@@ -42,6 +44,12 @@ namespace Game.Scripts.Runtime.Audio
         {
             if (clip == null) return;
             _sfxSource.PlayOneShot(clip, _sfxVolume * _masterVolume);
+        }
+
+        public void PlayFootsteps(AudioClip clip)
+        {
+            if (clip == null) return;
+            _sfxSource.PlayOneShot(clip, _footstepVolume * _masterVolume);
         }
         
     }

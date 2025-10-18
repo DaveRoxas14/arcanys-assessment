@@ -38,7 +38,7 @@ namespace Game.Scripts.Runtime.Enemies
                     var pos = transform.position + Random.insideUnitSphere * _spawnRadius;
                     pos.y = transform.position.y;
 
-                    var enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity);
+                    var enemy = Instantiate(_enemyPrefab, pos, Quaternion.identity, parent:transform);
                     
                     _enemyList.Add(enemy); 
                 }
