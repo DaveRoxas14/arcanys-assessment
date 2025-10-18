@@ -24,6 +24,7 @@ namespace Game.Scripts.Runtime
         [SerializeField] private float _gameTime;
 
         private bool _isGameOver;
+        private PlayerController _player;
 
         public bool IsGameOver => _isGameOver;
 
@@ -88,5 +89,19 @@ namespace Game.Scripts.Runtime
             InputManager.Instance.SwitchToUIControls();
             _gameOverUI.GameOver(false);
         }
+
+        #region Helpers
+
+        public void RegisterPlayer(PlayerController player)
+        {
+            _player = player;
+        }
+
+        public PlayerController GetPlayer()
+        {
+            return _player;
+        }
+
+        #endregion
     }
 }

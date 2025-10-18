@@ -1,3 +1,5 @@
+using System;
+using Game.Scripts.Runtime;
 using UnityEngine;
 
 
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.RegisterPlayer(this);
         _inputReader.MoveEvent += OnMove;
         _inputReader.JumpEvent += OnJump;
         _inputReader.JumpCanceledEvent += OnJumpReleased;
