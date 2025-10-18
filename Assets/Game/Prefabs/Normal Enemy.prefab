@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099b26b9515442d1a641d4c0950158ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Arcanys.Runtime::Game.Scripts.Runtime.Enemies.NormalEnemy
-  _moveSpeed: 3
+  _moveSpeed: 6
   _chaseRange: 100
-  _attackRange: 1.5
+  _attackRange: 2
   _jumpForce: 5
   _gravity: -9.8
   _airControlMultiplier: 0.5
