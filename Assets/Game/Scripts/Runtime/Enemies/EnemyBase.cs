@@ -35,9 +35,11 @@ namespace Game.Scripts.Runtime.Enemies
         protected float _lastAttackTime;
         protected bool _isDead;
         protected PlayerController _playerController;
+        protected GameManager _gm;
 
         private void Start()
         {
+            _gm = GameManager.Instance;
             _controller = GetComponent<CharacterController>();
             _player = GameManager.Instance.GetPlayer().transform;
             _playerController = _player.GetComponent<PlayerController>();
@@ -48,6 +50,7 @@ namespace Game.Scripts.Runtime.Enemies
         protected virtual void Update()
         {
             if (!_player || _isDead) return;
+            if(_gm && _gm.IsRestarting) return;
 
             Move();
             AttackWhenInDistance();

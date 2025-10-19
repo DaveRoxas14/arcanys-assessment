@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using Game.Scripts.Runtime;
+using Game.Scripts.Runtime.Audio;
 using Game.Scripts.Runtime.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -22,6 +23,7 @@ public class SceneNavigation : MonoBehaviour
     [SerializeField] private Button _quitBtn;
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private Fader _gameStartFade;
+    [SerializeField] private SoundEffect _bgm;
 
     [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
     [SerializeField] private int _sceneIndex;
@@ -39,6 +41,8 @@ public class SceneNavigation : MonoBehaviour
             
             var cts = new CancellationTokenSource();
             await _gameStartFade.FadeImage(1f, 0f, 1, cts.Token);
+            if(_bgm)
+                AudioManager.Instance.PlayBGM(_bgm.clip, true);
         }
         catch (Exception e)
         {
@@ -51,12 +55,14 @@ public class SceneNavigation : MonoBehaviour
     {
         _playGameBtn.onClick.AddListener(LoadMainLevel);
         _quitBtn.onClick.AddListener(QuitGame);
+        _settingsBtn.onClick.AddListener(OpenSettingsMenu);
     }
 
     private void OnDisable()
     {
         _playGameBtn.onClick.RemoveListener(LoadMainLevel);
         _quitBtn.onClick.RemoveListener(QuitGame);
+        _settingsBtn.onClick.RemoveListener(OpenSettingsMenu);
     }
 
     #endregion
@@ -83,6 +89,11 @@ public class SceneNavigation : MonoBehaviour
             Console.WriteLine(e);
         }
         
+        
+    }
+
+    private void OpenSettingsMenu()
+    {
         
     }
 

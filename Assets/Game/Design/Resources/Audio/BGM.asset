@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdddaf7878d4e6ca7670fec7170c8ef, type: 3}
   m_Name: BGM
   m_EditorClassIdentifier: Arcanys.Runtime::Game.Scripts.Runtime.Audio.SoundEffect
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: bbd76b3bc6021814ca86ca586a79b728, type: 3}
