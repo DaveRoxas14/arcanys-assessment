@@ -56,6 +56,7 @@ namespace Game.Scripts.Runtime.PauseMenu
         public void ShowPauseMenu()
         {
             if(GameManager.Instance.IsGameOver) return;
+            if(GameManager.Instance.IsSpawningGems) return;
             
             OnGamePaused?.Invoke(true);
             _pauseMenuObject.SetActive(true);
@@ -66,6 +67,8 @@ namespace Game.Scripts.Runtime.PauseMenu
         public void HidePauseMenu()
         {
             if(GameManager.Instance.IsGameOver) return;
+            if(GameManager.Instance.IsSpawningGems) return;
+            
             _pauseMenuObject.SetActive(false);
             Time.timeScale = 1;
             OnGamePaused?.Invoke(false);

@@ -11,14 +11,22 @@ namespace Arcanys.Collectibles
         [Header(ArcanysConstants.INSPECTOR.REFERENCES)] [SerializeField]
         private List<CollectibleSpawner> _gemSpawners = new List<CollectibleSpawner>();
 
+        private bool isSpawningGems;
+
+        public bool IsSpawningGems => isSpawningGems;
+
         public async Task StartSpawningGems()
         {
+            isSpawningGems = true;
+            
             foreach (var spawner in _gemSpawners)
             {
                 await spawner.SpawnCollectible(0);
                 
                 await Task.Yield(); 
             }
+
+            isSpawningGems = false;
         }
     }
 }

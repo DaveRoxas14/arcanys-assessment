@@ -26,14 +26,19 @@ namespace Game.Scripts.Runtime.Enemies
         {
             try
             {
-                await Task.Delay(_initialSpawnDelay * ArcanysConstants.INTEGERS.MILLISECOND);
+                // await Task.Delay(_initialSpawnDelay * ArcanysConstants.INTEGERS.MILLISECOND);
+                var gameManager = GameManager.Instance;
+                
+                while (gameManager.IsSpawningGems) // better to wait the gem spawner to finish instead of waiting a delay.
+                    await Task.Yield();
                 
                 for (var i = 0; i < _numberOfEnemiesToSpawn; i++)
                 {
                     var delay = _spawnDelay * ArcanysConstants.INTEGERS.MILLISECOND;
                     await Task.Delay(delay);
 
-                    while (GameManager.Instance.IsGamePaused)
+                    
+                    while (gameManager.IsGamePaused || gameManager.IsGameOver)
                         await Task.Yield();
                     
                     if (!transform) break;

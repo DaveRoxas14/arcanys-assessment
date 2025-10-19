@@ -43,6 +43,8 @@ namespace Game.Scripts.Runtime
 
         public bool IsGamePaused => _pauseMenuUi.IsPaused;
 
+        public bool IsSpawningGems => _gemSpawnManager.IsSpawningGems;
+
         public GameTime GameTime => _time;
 
         public int ScoreToWin => _scoreToWin;
