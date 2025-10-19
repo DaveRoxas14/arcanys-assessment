@@ -5,7 +5,9 @@ namespace Game.Scripts.Runtime.Audio
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance { get; private set; }
-        
+
+        #region Members
+
         [Header(ArcanysConstants.INSPECTOR.AUDIO_SOURCES)]
         [SerializeField] private AudioSource _bgmSource;
         [SerializeField] private AudioSource _sfxSource;
@@ -16,6 +18,8 @@ namespace Game.Scripts.Runtime.Audio
         [Range(0f, 1f)] public float BgmVolume = 1f;
         [Range(0f, 1f)] public float SfxVolume = 1f;
         [Range(0f, 1f)] public float FootstepVolume = 0.5f;
+
+        #endregion
         
         private void Awake()
         {
@@ -28,6 +32,8 @@ namespace Game.Scripts.Runtime.Audio
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        #region Play Audio Helpers
 
         public void PlayBGM(AudioClip clip, bool loop = false)
         {
@@ -51,6 +57,8 @@ namespace Game.Scripts.Runtime.Audio
             if (clip == null) return;
             _footstepSource.PlayOneShot(clip, FootstepVolume * MasterVolume);
         }
+
+        #endregion
 
         #region Helpers
 
