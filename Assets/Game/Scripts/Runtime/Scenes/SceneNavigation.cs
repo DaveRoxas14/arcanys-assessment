@@ -80,6 +80,7 @@ public class SceneNavigation : MonoBehaviour
     {
         try
         {
+            _playGameBtn.interactable = false;
             var cts = new CancellationTokenSource();
             await _gameStartFade.FadeImage(0f, 1f, 1f, cts.Token);
             
