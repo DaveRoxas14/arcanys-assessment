@@ -32,6 +32,9 @@ namespace Game.Scripts.Runtime.Enemies
                 {
                     var delay = _spawnDelay * ArcanysConstants.INTEGERS.MILLISECOND;
                     await Task.Delay(delay);
+
+                    while (GameManager.Instance.IsGamePaused)
+                        await Task.Yield();
                     
                     if (!transform) break;
 

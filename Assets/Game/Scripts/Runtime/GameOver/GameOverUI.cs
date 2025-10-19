@@ -27,11 +27,11 @@ namespace Game.Scripts.Runtime.GameOver
         [SerializeField] private string _winString;
 
         [SerializeField] private string _loseString;
-
-        #endregion
-
+        
         private bool _gameOver;
 
+        #endregion
+        
         #region Unity Functions
 
         public void OnEnable()

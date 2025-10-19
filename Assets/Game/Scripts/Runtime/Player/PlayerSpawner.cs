@@ -12,10 +12,11 @@ public class PlayerSpawner : MonoBehaviour
    [SerializeField] private Transform _spawnPoint;
    [SerializeField] private CinemachineCamera _camera;
 
+   private GameObject _player;
    #endregion
 
 
-   private GameObject _player;
+   
 
    #region Unity Functions
 

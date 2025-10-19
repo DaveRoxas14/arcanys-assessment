@@ -3,6 +3,7 @@ using System.Collections;
 using System.Threading;
 using Game.Scripts.Runtime;
 using Game.Scripts.Runtime.Audio;
+using Game.Scripts.Runtime.Scenes;
 using Game.Scripts.Runtime.UI;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -94,7 +95,7 @@ public class SceneNavigation : MonoBehaviour
 
     private void OpenSettingsMenu()
     {
-        
+        SettingsMenu.Instance.ShowSettingsMenu();
     }
 
     private void QuitGame()

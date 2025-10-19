@@ -9,6 +9,8 @@ namespace Game.Scripts.Runtime.Enemies
     [RequireComponent(typeof(CharacterController))]
     public abstract class EnemyBase : MonoBehaviour
     {
+        #region Members
+
         [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField] protected Animator _animator;
 
@@ -36,6 +38,11 @@ namespace Game.Scripts.Runtime.Enemies
         protected bool _isDead;
         protected PlayerController _playerController;
         protected GameManager _gm;
+        
+
+        #endregion
+
+        #region Unity Functions
 
         private void Start()
         {
@@ -56,6 +63,9 @@ namespace Game.Scripts.Runtime.Enemies
             AttackWhenInDistance();
         }
 
+        #endregion
+
+        #region Movement
 
         protected virtual void Move()
         {
@@ -85,6 +95,11 @@ namespace Game.Scripts.Runtime.Enemies
             _velocity.y += _gravity * Time.deltaTime;
             _controller.Move(_velocity * Time.deltaTime);
         }
+        
+
+        #endregion
+
+        #region Attack
 
         protected virtual void AttackWhenInDistance()
         {
@@ -131,5 +146,7 @@ namespace Game.Scripts.Runtime.Enemies
         }
 
         protected abstract void Attack();
+
+        #endregion
     }
 }

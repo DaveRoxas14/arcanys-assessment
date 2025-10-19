@@ -6,9 +6,16 @@ namespace Game.Scripts.Runtime.GameTimer
 {
     public class GameTimeUI : MonoBehaviour
     {
+        #region Members
+
         [Header(ArcanysConstants.INSPECTOR.REFERENCES)]
         [SerializeField]
         private TextMeshProUGUI _timerText;
+
+        #endregion
+
+        #region Unity Functions
+
         private void Start()
         {
             var gameTimer = GameManager.Instance.GameTime;
@@ -24,6 +31,10 @@ namespace Game.Scripts.Runtime.GameTimer
             gameTimer.OnTimerTick -= OnTimerTick;
             gameTimer.OnTimerEnd -= OnTimerFinished;
         }
+
+        #endregion
+
+        #region Timer Functions
 
         private void OnTimerTick(float timeLeft)
         {
@@ -42,5 +53,7 @@ namespace Game.Scripts.Runtime.GameTimer
         {
             _timerText.text = "";
         }
+
+        #endregion
     }
 }

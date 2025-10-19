@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Game.Scripts.Runtime.Scenes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,6 +16,7 @@ namespace Game.Scripts.Runtime.PauseMenu
         [Header(ArcanysConstants.INSPECTOR.REFERENCES)] 
         [SerializeField] private GameObject _pauseMenuObject;
         [SerializeField] private Button _resumeBtn;
+        [SerializeField] private Button _settingsBtn;
         [SerializeField] private Button _restartBtn;
         [SerializeField] private Button _quitBtn;
         
@@ -32,6 +34,7 @@ namespace Game.Scripts.Runtime.PauseMenu
             _resumeBtn.onClick.AddListener(ResumeGame);
             _restartBtn.onClick.AddListener(RestartGame);
             _quitBtn.onClick.AddListener(QuitGame);
+            _settingsBtn.onClick.AddListener(Settings);
             OnGamePaused += OnPauseEvent;
             
             _pauseMenuObject.SetActive(false);
@@ -42,6 +45,7 @@ namespace Game.Scripts.Runtime.PauseMenu
             _resumeBtn.onClick.RemoveListener(ResumeGame);
             _restartBtn.onClick.RemoveListener(RestartGame);
             _quitBtn.onClick.RemoveListener(QuitGame);
+            _settingsBtn.onClick.RemoveListener(Settings);
             OnGamePaused -= OnPauseEvent;
         }
 
@@ -104,6 +108,12 @@ namespace Game.Scripts.Runtime.PauseMenu
         {
             if(GameManager.Instance.IsGameOver) return;
             HidePauseMenu();
+        }
+
+        private void Settings()
+        {
+            if(GameManager.Instance.IsGameOver) return;
+            SettingsMenu.Instance.ShowSettingsMenu();
         }
 
         #endregion

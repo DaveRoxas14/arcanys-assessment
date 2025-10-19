@@ -12,10 +12,10 @@ namespace Game.Scripts.Runtime.Audio
         [SerializeField] private AudioSource _footstepSource;
         
         [Header(ArcanysConstants.INSPECTOR.SETTINGS)]
-        [Range(0f, 1f)] public float _masterVolume = 1f;
-        [Range(0f, 1f)] public float _bgmVolume = 1f;
-        [Range(0f, 1f)] public float _sfxVolume = 1f;
-        [Range(0f, 1f)] public float _footstepVolume = 0.5f;
+        [Range(0f, 1f)] public float MasterVolume = 1f;
+        [Range(0f, 1f)] public float BgmVolume = 1f;
+        [Range(0f, 1f)] public float SfxVolume = 1f;
+        [Range(0f, 1f)] public float FootstepVolume = 0.5f;
         
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace Game.Scripts.Runtime.Audio
             if (clip == null) return;
             _bgmSource.Stop();
 
-            _bgmSource.volume = _bgmVolume;
+            _bgmSource.volume = BgmVolume * MasterVolume;
             _bgmSource.loop = loop;
             _bgmSource.clip = clip;
             _bgmSource.Play();
@@ -43,14 +43,36 @@ namespace Game.Scripts.Runtime.Audio
         public void PlaySFX(AudioClip clip)
         {
             if (clip == null) return;
-            _sfxSource.PlayOneShot(clip, _sfxVolume * _masterVolume);
+            _sfxSource.PlayOneShot(clip, SfxVolume * MasterVolume);
         }
 
         public void PlayFootsteps(AudioClip clip)
         {
             if (clip == null) return;
-            _sfxSource.PlayOneShot(clip, _footstepVolume * _masterVolume);
+            _footstepSource.PlayOneShot(clip, FootstepVolume * MasterVolume);
         }
+
+        #region Helpers
+
+        public void ChangeBgmVolume(float value)
+        {
+            BgmVolume = value;
+            _bgmSource.volume = value * MasterVolume;
+        }
+        
+        public void ChangeSfxVolume(float value)
+        {
+            SfxVolume = value;
+            _sfxSource.volume = value * MasterVolume;
+        }
+        
+        public void ChangeFootstepVolume(float value)
+        {
+            FootstepVolume = value;
+            _footstepSource.volume = value * MasterVolume;
+        }
+
+        #endregion
         
     }
 }

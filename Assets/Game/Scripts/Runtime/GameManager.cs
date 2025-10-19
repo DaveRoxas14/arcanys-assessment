@@ -5,6 +5,7 @@ using Arcanys.Collectibles;
 using Game.Scripts.Runtime.Audio;
 using Game.Scripts.Runtime.GameOver;
 using Game.Scripts.Runtime.GameTimer;
+using Game.Scripts.Runtime.PauseMenu;
 using Game.Scripts.Runtime.UI;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Game.Scripts.Runtime
         [SerializeField] private GameTime _time;
         [SerializeField] private Fader _gameStartFade;
         [SerializeField] private GemSpawnManager _gemSpawnManager;
+        [SerializeField] private PauseMenuUi _pauseMenuUi;
         [SerializeField] private SoundEffect _bgm;
         [SerializeField] private SoundEffect _winBgm;
         [SerializeField] private SoundEffect _loseBgm;
@@ -38,6 +40,8 @@ namespace Game.Scripts.Runtime
         private PlayerController _player;
 
         public bool IsGameOver => _isGameOver;
+
+        public bool IsGamePaused => _pauseMenuUi.IsPaused;
 
         public GameTime GameTime => _time;
 
